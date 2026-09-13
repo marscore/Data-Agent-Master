@@ -1,0 +1,39 @@
+# AgentWorks — 通用 AI Agent 平台 (standalone; MCP 联邦 + RAG + LangGraph + Bedrock)
+# Pins mirror the proven set from the reference project (SecurityRAGMaster),
+# trimmed to Bedrock + OpenAI-compatible mode (no heavy local torch models).
+
+# --- Web ---
+fastapi==0.136.1
+uvicorn[standard]==0.34.0
+python-multipart==0.0.28
+httpx>=0.27.0
+python-dotenv==1.2.2
+pydantic==2.13.4
+pydantic-settings==2.14.1
+PyJWT[crypto]==2.10.1
+
+# --- LLM: Bedrock (Anthropic native + Cohere) and OpenAI-compatible ---
+boto3==1.43.7
+anthropic>=0.112.0
+openai>=1.0.0
+aws-bedrock-token-generator>=1.1.0
+numpy>=1.26
+
+# --- Vector store: Milvus (milvus-lite lets it run with zero infra locally) ---
+pymilvus==3.0.0
+milvus-lite==3.0.0
+
+# --- Config / metadata / memory / trace persistence ---
+sqlalchemy==2.0.49
+psycopg2-binary==2.9.12
+
+# --- LangGraph orchestration (graph layer only; models go through our Bedrock/OpenAI clients) ---
+langgraph==1.2.11
+langchain-core==1.5.6
+langgraph-checkpoint==4.2.0
+langgraph-checkpoint-sqlite>=2.0.0
+langgraph-prebuilt==1.1.0
+langgraph-sdk==0.4.2
+
+# --- MCP client (federate data-master + OpenMetadata + Superset MCP servers) ---
+mcp==1.29.0
