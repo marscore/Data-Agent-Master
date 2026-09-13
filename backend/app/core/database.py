@@ -12,7 +12,7 @@ from typing import Iterator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
-from app.core.config import settings
+from app.core.config import resolve_data_path, settings
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +27,9 @@ def _make_engine():
     if url.startswith("sqlite"):
         path = url.split("///")[-1]
         if path and path != ":memory:":
-            os.makedirs(os.path.dirname(os.path.abspath(path)) or ".", exist_ok=True)
+            abs_path = resolve_data_path(path)
+            os.makedirs(os.path.dirname(abs_path) or ".", exist_ok=True)
+            url = f"sqlite:///{abs_path}"
         connect_args = {"check_same_thread": False}
     return create_engine(url, echo=False, future=True, pool_pre_ping=True, connect_args=connect_args)
 

@@ -11,9 +11,19 @@ MCP registry seed merely points the flagship agent at data-master's /api/mcp.
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Anchor for "./data/..." style settings below, so they resolve the same file
+# regardless of the process's current working directory at launch.
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+
+def resolve_data_path(path: str) -> str:
+    p = Path(path)
+    return str(p if p.is_absolute() else BASE_DIR / p)
 
 
 class Settings(BaseSettings):

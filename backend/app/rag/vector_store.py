@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 
-from app.core.config import settings
+from app.core.config import resolve_data_path, settings
 from app.embeddings.embeddings import embedding_service
 
 logger = logging.getLogger(__name__)
@@ -36,7 +36,8 @@ def _get_client():
 
                 uri = settings.VECTOR_DB_URI
                 if uri.endswith(".db") or uri.endswith(".sqlite"):
-                    os.makedirs(os.path.dirname(os.path.abspath(uri)) or ".", exist_ok=True)
+                    uri = resolve_data_path(uri)
+                    os.makedirs(os.path.dirname(uri) or ".", exist_ok=True)
                 token = settings.VECTOR_DB_TOKEN or None
                 _client = MilvusClient(uri=uri, token=token, db_name=settings.VECTOR_DB_NAME)
                 logger.info("Milvus client connected: uri=%s", uri)
@@ -66,6 +67,7 @@ def ensure_collection(agent_id: str) -> str:
         index_params.add_index(field_name="vector", metric_type="COSINE", index_type="AUTOINDEX")
         client.create_collection(collection_name=name, schema=schema, index_params=index_params)
         logger.info("Created Milvus collection '%s' (dim=%d)", name, dim)
+    client.load_collection(collection_name=name)
     _ensured.add(name)
     return name
 
@@ -95,6 +97,9 @@ def search(agent_id: str, query: str, limit: int, extra_queries: Optional[List[s
     client = _get_client()
     if not client.has_collection(name):
         return []
+    if name not in _ensured:
+        client.load_collection(collection_name=name)
+        _ensured.add(name)
     queries = [query] + [q for q in (extra_queries or []) if q and q != query]
     qvecs = embedding_service.embed_queries(queries)
     hits: Dict[str, Dict[str, Any]] = {}
