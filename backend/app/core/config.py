@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     )
 
     # ── Application ──────────────────────────────────────────────────────────
-    APP_NAME: str = "AgentWorks"
+    APP_NAME: str = "Data Agent Master"
     APP_VERSION: str = "0.1.0"
     DEBUG: bool = True
     HOST: str = "0.0.0.0"

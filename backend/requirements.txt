@@ -1,4 +1,4 @@
-# AgentWorks — 通用 AI Agent 平台 (standalone; MCP 联邦 + RAG + LangGraph + Bedrock)
+# Data Agent Master — 通用 AI Agent 平台 (standalone; MCP 联邦 + RAG + LangGraph + Bedrock)
 # Pins mirror the proven set from the reference project (SecurityRAGMaster),
 # trimmed to Bedrock + OpenAI-compatible mode (no heavy local torch models).
 

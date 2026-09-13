@@ -2,7 +2,7 @@
 data-master's POST /api/mcp (initialize / tools/list / tools/call), exposing
 list_metrics / get_metric / query_metric with canned semantic data.
 
-Lets AgentWorks prove the full loop (MCP federation -> RAG -> tool loop -> answer
+Lets Data Agent Master prove the full loop (MCP federation -> RAG -> tool loop -> answer
 -> memory -> trace) end-to-end without running the Java backend. Point a source
 at http://localhost:8790/mcp (transport=jsonrpc_http, auth=none).
 

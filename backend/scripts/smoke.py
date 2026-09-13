@@ -1,4 +1,4 @@
-"""End-to-end smoke test against a running AgentWorks backend + mock MCP server.
+"""End-to-end smoke test against a running Data Agent Master backend + mock MCP server.
 
 Exercises the whole loop with REAL Bedrock:
   create agent -> reindex RAG from MCP -> streaming chat (routing + tool loop +

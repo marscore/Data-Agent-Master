@@ -1,4 +1,4 @@
-"""AgentWorks — 通用 AI Agent 平台 (backend).
+"""Data Agent Master — 通用 AI Agent 平台 (backend).
 
 FastAPI service: MCP-federated, RAG-augmented, LangGraph-orchestrated agents on
 Bedrock or OpenAI-compatible models, with thread memory and run tracing. The

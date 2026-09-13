@@ -1,4 +1,4 @@
-# AgentWorks — 通用 AI Agent 平台
+# Data Agent Master — 通用 AI Agent 平台
 
 把平台的 AI 能力从 data-master 单体里拆出来的独立项目。它是一个**通用的、可配置的 AI Agent 平台**：
 通过 **MCP 联邦**消费本平台（data-master `/api/mcp`）与外部系统（OpenMetadata、Superset 等）的工具，
